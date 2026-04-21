@@ -1,4 +1,4 @@
-import { list, options } from './data.js';
+import { list } from './data.js';
 import { getFeedbackArray } from './lookup.js';
 import { bestGuess, filterPool } from './solver.js';
 
