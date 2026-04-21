@@ -1893,5 +1893,4 @@ const preppedList = list.map(champion => {
 
 export {
     preppedList as list,
-    options,
 };
