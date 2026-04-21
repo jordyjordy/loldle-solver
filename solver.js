@@ -1,4 +1,3 @@
-import { options } from './data.js'; 
 import lookup from './lookup.js';
 
 const feedbackOptions = [
@@ -12,7 +11,6 @@ const feedbackOptions = [
 ]
 
 const bestGuess = (pool) => {
-    const entropy = [];
     const poolSize = pool.length;
     pool.forEach((champion, index) => {
         const buckets = {};
