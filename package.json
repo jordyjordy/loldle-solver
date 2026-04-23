@@ -2,13 +2,16 @@
   "name": "loldle-analyzer",
   "version": "1.0.0",
   "description": "An analyzer that uses max entropy to gumake guesses",
-  "main": "index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "electron .",
     "generate-lookup": "node generate-lookup.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^41.2.2"
+  }
 }

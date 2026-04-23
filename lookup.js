@@ -21,7 +21,6 @@ const compareArrays = (guessArray, targetArray) => {
     return 1;
 }
 
-
 const getFeedbackArray = (guess, target) => {
     const feedbackArray = [];
     feedbackArray.push(guess.gender === target.gender ? 0 : 1);
@@ -31,7 +30,7 @@ const getFeedbackArray = (guess, target) => {
     feedbackArray.push(compareArrays(guess.range_type, target.range_type));
     feedbackArray.push(compareArrays(guess.regions, target.regions));
     if (guess.year === target.year) {
-        feedbackArray.push(0);;
+        feedbackArray.push(0);
     } else {
       feedbackArray.push(guess.year < target.year ? 3 : 4);
     }

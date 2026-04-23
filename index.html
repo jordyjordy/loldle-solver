@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Get help with Loldle!</title>
+  </head>
+  <body>
+    <div class="content">
+        <h1>
+            Get help with your guesses!
+        </h1>
+        <h2>
+            History:
+        </h2>
+        <div class="history">
+
+        </div>
+        <h2>
+            Suggested guess:
+            <span class="suggested-guess" id="suggested-guess"></span>
+        </h2>
+        <div class="guess-box">
+            <label>
+                Guess
+            </label>
+            <select required id="champion-select">
+                <option value="" disabled selected hidden>Select a champion</option>
+            </select>
+            <label>
+                Outcome
+            </label>
+            <div class="feedback-box">
+                <span>
+                    Gender
+                </span>
+                <span>
+                    Positions
+                </span>
+                <span>
+                    Species
+                </span>
+                <span>
+                    Resource
+                </span>
+                <span>
+                    Range
+                </span>
+                <span>
+                    Region
+                </span>
+                <span>
+                    Release date
+                </span>
+                <button id="gender-feedback" class="class-1">
+                </button>
+                <button id="position-feedback" class="class-1">
+                </button>
+                <button id="species-feedback" class="class-1">
+                </button>
+                <button id="resource-feedback" class="class-1">
+                </button>
+                <button id="range-feedback" class="class-1">
+                </button>
+                <button id="region-feedback" class="class-1">
+                </button>
+                <button id="release-feedback" class="class-1">
+                </button>
+            </div>
+            <button type="button" id="submit-guess" disabled>
+                Submit guess
+            </button>
+        </div>
+    </div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>

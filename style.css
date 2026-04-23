@@ -1,0 +1,81 @@
+body {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    background-color: #262626;
+    color: white;
+    font-family: sans-serif;
+}
+
+.suggested-guess {
+    margin-left: 0.5rem;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.guess-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feedback-box {
+    display: grid;
+    grid-template-rows: 40px 80px;
+    column-gap: 2px;
+    grid-template-columns: repeat(7, 80px);
+    margin-bottom: 10px;
+}
+
+.feedback-box span {
+    text-align: center;
+}
+
+.feedback-box button {
+    border: none;
+    outline: none;
+    background-color: red;
+    text-align: center;
+    cursor: pointer;
+}
+
+.feedback-box button.class-0 {
+    background-color: green;
+}
+
+.feedback-box button.class-2 {
+    background-color: orange;
+}
+
+.feedback-box button.class-3::before {
+    content: "after";
+}
+
+.feedback-box button.class-4::before {
+    content: "before";
+}
+
+
+.feedback-box button:hover {
+    filter:brightness(80%);
+}
+
+select {
+    background-color: #262626;
+    outline: none;
+    padding: 5px;
+    border-radius: 4px;
+    color: white;
+}
+
+select:invalid {
+    color: grey;
+}
+
+option {
+    color: white;
+}
