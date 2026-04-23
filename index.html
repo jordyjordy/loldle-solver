@@ -1,44 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
     <title>Get help with Loldle!</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="content">
         <h1>
             Get help with your guesses!
         </h1>
-        <h2>
-            History:
-        </h2>
-        <div class="history">
-
-        </div>
         <h2>
             Suggested guess:
             <span class="suggested-guess" id="suggested-guess"></span>
         </h2>
         <div class="guess-box">
             <label>
-                Guess
+                Guess:
             </label>
-            <select required id="champion-select">
-                <option value="" disabled selected hidden>Select a champion</option>
-            </select>
-            <label>
-                Outcome
-            </label>
+            <div>
+                <select required id="champion-select">
+                    <option value="" disabled selected hidden>Select a champion</option>
+                </select>
+                <button id="restart-button">
+                    Restart
+                </button>
+            </div>
             <div class="feedback-box">
                 <span>
                     Gender
@@ -80,7 +72,39 @@
                 Submit guess
             </button>
         </div>
+        <h2>
+            History:
+        </h2>
+        <div class="history-header">
+            <span>
+                Name
+            </span>
+            <span>
+                Gender
+            </span>
+            <span>
+                Positions
+            </span>
+            <span>
+                Species
+            </span>
+            <span>
+                Resource
+            </span>
+            <span>
+                Range
+            </span>
+            <span>
+                Region
+            </span>
+            <span>
+                Release date
+            </span>
+        </div>
+        <div class="history" id="history-box">
+        </div>
     </div>
     <script src="./renderer.js"></script>
-  </body>
+</body>
+
 </html>

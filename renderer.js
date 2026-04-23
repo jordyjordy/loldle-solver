@@ -40,8 +40,7 @@ const buttonIdOptionMap = {
 
 const guessButton = document.getElementById("submit-guess");
 
-
-const defaultFeedback =[1, 1, 1, 1, 1, 1, 1];
+const defaultFeedback = [1, 1, 1, 1, 1, 1, 1];
 let feedback = [
     ...defaultFeedback,
 ]
@@ -58,12 +57,12 @@ window.worldApi.champions.forEach((champion) => {
     championSelect.appendChild(option);
 });
 
-const buttonMap = {};
+const buttons = [];
 
 Object.entries(buttonIdOptionMap).forEach(([buttonId, mapping], index) => {
     const buttonEl = document.getElementById(buttonId);
 
-    buttonMap[buttonId] = buttonEl;
+    buttons.push(buttonEl);
 
     buttonEl.addEventListener('click', () => {
         const current = feedback[index];
@@ -75,22 +74,59 @@ Object.entries(buttonIdOptionMap).forEach(([buttonId, mapping], index) => {
     })
 });
 
+const historyEl = document.getElementById('history-box');
 
 const setDefaultState = () => {
     feedback = [...defaultFeedback];
     championSelect.selectedIndex = 0;
+    buttons.forEach((buttonEl) => {
+        buttonEl.classList = 'class-1'
+    })
     selectedChampion = '';
     guessButton.disabled = true;
 }
 
+const insertHistory = (guessedChampion, feedback) => {
+    const nameDiv = document.createElement("div");
+    nameDiv.classList = "name"
+    nameDiv.innerHTML = guessedChampion.championName;
+    historyEl.appendChild(nameDiv);
+    feedback.forEach((item) => {
+        const feedbackDiv = document.createElement("div");
+        feedbackDiv.classList.add(`class-${item}`);
+        historyEl.appendChild(feedbackDiv);
+    })
+}
 
+const restart = () => {
+        historyEl.innerHTML = '';
+    list = [
+        ...window.worldApi.champions,
+    ]
+    updateProposedGuess(window.worldApi.bestGuess(list));
+    setDefaultState();
+}
 
-guessButton.addEventListener('click', () => {{
-    if (selectedChampion !== '') {
-        const guessedChampion = window.worldApi.champions.find((champion) => champion.championId === selectedChampion)
-        list = window.worldApi.filterPool(list, guessedChampion, feedback.join(","));
-        if (list.length > 0) {
-            updateProposedGuess(window.worldApi.bestGuess(list));
+guessButton.addEventListener('click', () => {
+    {
+        if (selectedChampion !== '') {
+            const guessedChampion = window.worldApi.champions.find((champion) => champion.championId === selectedChampion)
+            insertHistory(guessedChampion, feedback);
+            list = window.worldApi.filterPool(list, guessedChampion, feedback.join(","));
+            if (list.length > 0) {
+                setDefaultState();
+                updateProposedGuess(window.worldApi.bestGuess(list));
+            } else {
+                alert("Could not find any matching champions, either the set is different or you made a mistake.")
+                restart();
+            }
         }
     }
-}})
+})
+
+const restartButtonEl = document.getElementById('restart-button');
+
+
+restartButtonEl.addEventListener('click', () => {
+    restart();
+});
