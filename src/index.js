@@ -1,13 +1,17 @@
+import { list as championList } from './data.js';
+import { getFeedbackArray } from './lookup';
+import { bestGuess, filterPool } from './solver.js';
+
 // populate dropdown
 const championSelect = document.getElementById('champion-select');
 
 let selectedChampion = '';
 
 let list = [
-    ...window.worldApi.champions,
+    ...championList,
 ]
 
-let proposedGuess = window.worldApi.bestGuess(list);
+let proposedGuess = bestGuess(list);
 
 const suggestedGuessEl = document.getElementById('suggested-guess');
 
@@ -50,7 +54,7 @@ championSelect.addEventListener('change', (val) => {
     guessButton.disabled = false;
 })
 
-window.worldApi.champions.forEach((champion) => {
+championList.forEach((champion) => {
     const option = document.createElement('option');
     option.value = champion.championId;
     option.textContent = champion.championName;
@@ -101,21 +105,21 @@ const insertHistory = (guessedChampion, feedback) => {
 const restart = () => {
         historyEl.innerHTML = '';
     list = [
-        ...window.worldApi.champions,
+        ...championList,
     ]
-    updateProposedGuess(window.worldApi.bestGuess(list));
+    updateProposedGuess(bestGuess(list));
     setDefaultState();
 }
 
 guessButton.addEventListener('click', () => {
     {
         if (selectedChampion !== '') {
-            const guessedChampion = window.worldApi.champions.find((champion) => champion.championId === selectedChampion)
+            const guessedChampion = championList.find((champion) => champion.championId === selectedChampion)
             insertHistory(guessedChampion, feedback);
-            list = window.worldApi.filterPool(list, guessedChampion, feedback.join(","));
+            list = filterPool(list, guessedChampion, feedback.join(","));
             if (list.length > 0) {
                 setDefaultState();
-                updateProposedGuess(window.worldApi.bestGuess(list));
+                updateProposedGuess(bestGuess(list));
             } else {
                 alert("Could not find any matching champions, either the set is different or you made a mistake.")
                 restart();
