@@ -17,6 +17,39 @@ body {
     flex-direction: column;
 }
 
+.switcher {
+    display: flex;
+    gap: 20px;
+}
+
+.switcher-btn {
+    background-color: rgba(255, 255, 255, 0.019);
+    border: 1px solid black;
+    color: rgb(141, 141, 141);
+    padding: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.switcher-btn.active {
+    color: white;
+}
+
+.switcher-btn:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.133);
+}
+
+.mode {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mode.hidden {
+    display: none;
+}
+
 .guess-box {
     display: flex;
     flex-direction: column;
@@ -99,13 +132,36 @@ body {
 }
 
 .feedback-box button.class-3::before {
-    content: "after";
-}
-
-.feedback-box button.class-4::before {
     content: "before";
 }
 
+.feedback-box button.class-4::before {
+    content: "after";
+}
+
+.guess-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.guess-row__button {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+
+    border-radius: 4px;
+    padding: 2px;
+    width: 25px;
+    height: 25px;
+}
+
+.analyze-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
 
 .feedback-box button:hover {
     filter:brightness(80%);

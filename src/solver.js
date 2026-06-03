@@ -1,4 +1,4 @@
-import lookup from './lookup.js';
+import lookup, { getFeedbackArray } from './lookup.js';
 
 const feedbackOptions = [
     [0, 1],
@@ -37,6 +37,40 @@ const bestGuess = (pool) => {
     return newPool[0];
 }
 
+const giveAverageAndFilter = (pool, champion, result) => {
+    const poolSize = pool.length;
+    const buckets = {};
+    pool.forEach(target => {
+        if (target.championId === champion.championId) {
+            return;
+        }
+        const feedback = lookup[champion.championId][target.championId].join(",");
+        if (buckets[feedback] === undefined) {
+            buckets[feedback] = 1
+        } else {
+            buckets[feedback] += 1;
+        }
+    });
+    const expectedRemaining = Object.values(buckets).reduce((prev, bucket) => {
+        return prev + (bucket * bucket) / poolSize;
+    }, 0);
+
+    const expectedEliminated = poolSize - expectedRemaining;
+    const feedbackArray = getFeedbackArray(champion, result);
+    const newPool = filterPool(pool, champion, feedbackArray.join(","));
+    const actualEliminated = poolSize - newPool.length;
+    const luck = actualEliminated > expectedEliminated
+        ? 'lucky'
+        : 'unlucky';
+    return {
+        pool: newPool,
+        luck,
+        expectedEliminated,
+        expectedRemaining,
+        actualEliminated,
+    }
+}
+
 const filterPool = (pool, guess, feedback) => {
     return pool.filter((target) => {
         if (guess.championId === target.championId) {
@@ -49,5 +83,6 @@ const filterPool = (pool, guess, feedback) => {
 export {
     bestGuess,
     filterPool,
+    giveAverageAndFilter,
 }
 
