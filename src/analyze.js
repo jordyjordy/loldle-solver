@@ -10,6 +10,14 @@ const resultEl = document.getElementById("guess-results");
 const botResultEl = document.getElementById("bot-guess-results")
 let selectedChampion = '';
 
+championList.forEach((champion) => {
+    const option = document.createElement('option');
+    option.value = champion.championId;
+    option.id = `analyze-option-${champion.championId}`;
+    option.textContent = champion.championName;
+    championSelect.appendChild(option);
+});
+
 let guesses = [];
 
 const analyzeList = document.getElementById("analyze-list-box");
@@ -45,7 +53,9 @@ const setDefaultState = () => {
     botHistoryEl.innerHTML = '';
     botResultEl.innerHTML = '';
     addButton.disabled = false;
-    
+    championList.forEach((champion) => {
+        document.getElementById(`analyze-option-${champion.championId}`).hidden = false;
+    })
 }
 
 const insertGuess = (guessedChampion) => {
@@ -64,6 +74,7 @@ const insertGuess = (guessedChampion) => {
     buttonEl.addEventListener('click', () => {
         guesses = guesses.filter((id) => id !== guessedChampion.championId);
         guessDiv.remove();
+        document.getElementById(`analyze-option-${ guessedChampion.championId}`).hidden = false;
         console.log(guesses);
         if (guesses.length === 0) {
             analyzeButton.disabled = true;
@@ -82,8 +93,8 @@ addButton.addEventListener('click', () => {
         const guessedChampion = championList.find((champion) => champion.championId === selectedChampion);
         guesses.push(selectedChampion);
         insertGuess(guessedChampion);
-        const option = document.getElementById( `analyze-option-${selectedChampion}`);
-        option.remove();
+        const option = document.getElementById(`analyze-option-${selectedChampion}`);
+        option.hidden = true;
         selectedChampion = '';
         championSelect.selectedIndex = 0;
     }
@@ -134,7 +145,7 @@ analyzeButton.addEventListener('click', () => {
     });
     const finalFeedback = getFeedbackArray(answerChampion, answerChampion);
     const data = giveAverageAndFilter(list, answerChampion, answerChampion);
-    insertGuessQuality(answerChampion,data, resultEl);
+    insertGuessQuality(answerChampion, data, resultEl);
     insertHistory(answerChampion, finalFeedback, historyEl);
     resultAnalysisEl.classList.remove('hidden');
 
@@ -155,7 +166,7 @@ analyzeButton.addEventListener('click', () => {
         console.log(list);
     }
     const newData = giveAverageAndFilter(list, answerChampion, answerChampion);
-    insertGuessQuality(answerChampion,data, botResultEl);
+    insertGuessQuality(answerChampion, data, botResultEl);
     botResultAnalysisEl.classList.remove('hidden');
 })
 
