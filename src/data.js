@@ -164,6 +164,8 @@ const list = [{
     regions: ["Runeterra"],
     release_date: "2015-03-12"
 }, {
+    _id: "belveth",
+    championId: "belveth",
     championName: "Bel'Veth",
     gender: "Female",
     positions: ["Jungle"],
@@ -602,6 +604,8 @@ const list = [{
     regions: ["Zaun"],
     release_date: "2013-10-10"
 }, {
+    _id: 'ksante',
+    championId: 'ksante',
     championName: "K'Sante",
     gender: "Male",
     positions: ["Top"],
@@ -809,6 +813,17 @@ const list = [{
     regions: ["Freljord"],
     release_date: "2013-04-30"
 }, {
+    _id: "6a54f6dd577b062621dad507",
+    championId: "6a54f6dd577b062621dad507",
+    championName: "Locke",
+    gender: "Male",
+    positions: ["Middle", "Jungle"],
+    species: ["Human"],
+    resource: "Mana",
+    range_type: ["Melee"],
+    regions: ["Demacia"],
+    release_date: "2026-06-24"
+}, {
     _id: "6293f4b24fccc7941b03a443",
     championId: "628141c33a4f16643c39d086",
     championName: "Lucian",
@@ -1007,6 +1022,8 @@ const list = [{
     regions: ["Ixtal"],
     release_date: "2009-12-17"
 }, {
+    "_id": "nilah",
+    "championId": "nilah",
     championName: "Nilah",
     gender: "Female",
     positions: ["Bottom"],

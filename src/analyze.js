@@ -21,17 +21,9 @@ championList.forEach((champion) => {
 let guesses = [];
 
 const analyzeList = document.getElementById("analyze-list-box");
-
+console.log(championList);
 const analyzeButton = document.getElementById("analyze-guess");
 const addButton = document.getElementById("add-button");
-
-championList.forEach((champion) => {
-    const option = document.createElement('option');
-    option.value = champion.championId;
-    option.id = `analyze-option-${champion.championId}`;
-    option.textContent = champion.championName;
-    championSelect.appendChild(option);
-});
 
 championSelect.addEventListener('change', (val) => {
     selectedChampion = val.target.value;
