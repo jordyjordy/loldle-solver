@@ -183,3 +183,74 @@ select:invalid {
 option {
     color: white;
 }
+
+
+@media (max-width: 1100px) {
+    .switcher-btn {
+        font-size: 50px;
+        padding: 50px;
+    }
+    html {
+        font-size: 40px;
+    }
+
+    .feedback-box {
+        grid-template-rows: 7vw 11vw;
+        grid-template-columns: repeat(7, 11vw);
+    }
+    
+    .feedback-box {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        container-type: inline-size;
+    }
+
+    .feedback-box > span {
+        text-align: center;
+        min-width: 0;
+        overflow-wrap: break-word;
+    }
+
+    .wrapping, .wrapping > div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        min-width: 0;
+        overflow-wrap: break-word;
+    }
+    .wrapping > div > div {
+        text-align: center;
+    }
+
+    .feedback-box > span, .history-header > span {
+        font-size: 60%;
+    }
+
+    .history-header {
+        grid-template-columns: repeat(8, 11vw);
+        padding-right: 11vw;
+    }
+
+    .history {
+        grid-template-columns: repeat(8, 11vw);
+        padding-right: 11vw;
+    }
+
+    .history > div {
+        height: 11vw;
+        font-size: 20px;
+    }
+
+    .guess-row__button {
+        width: 50px;
+        height: 50px;
+    }
+
+    button, select, input, textarea {
+        font: inherit;
+    }
+
+    h1 {
+        font-size: 60px;
+    }
+}
