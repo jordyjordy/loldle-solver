@@ -184,6 +184,12 @@ option {
     color: white;
 }
 
+.border-list {
+    border-bottom: 1px solid white;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
 
 @media (max-width: 1100px) {
     .switcher-btn {

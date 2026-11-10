@@ -21,7 +21,7 @@ championList.forEach((champion) => {
 let guesses = [];
 
 const analyzeList = document.getElementById("analyze-list-box");
-console.log(championList);
+
 const analyzeButton = document.getElementById("analyze-guess");
 const addButton = document.getElementById("add-button");
 
@@ -66,8 +66,8 @@ const insertGuess = (guessedChampion) => {
     buttonEl.addEventListener('click', () => {
         guesses = guesses.filter((id) => id !== guessedChampion.championId);
         guessDiv.remove();
-        document.getElementById(`analyze-option-${ guessedChampion.championId}`).hidden = false;
-        console.log(guesses);
+        document.getElementById(`analyze-option-${guessedChampion.championId}`).hidden = false;
+
         if (guesses.length === 0) {
             analyzeButton.disabled = true;
         }
@@ -94,7 +94,6 @@ addButton.addEventListener('click', () => {
 
 
 const insertHistory = (guessedChampion, feedback, target) => {
-    console.log(guessedChampion);
     const nameDiv = document.createElement("div");
     nameDiv.classList = "name"
     nameDiv.innerHTML = guessedChampion.championName;
@@ -110,14 +109,22 @@ const insertGuessQuality = (guessChampion, data, target, bestChamp) => {
     const div = document.createElement("div");
     const div1 = document.createElement("div");
     div1.innerHTML = `${guessChampion.championName} guess: average remaining: ${data.expectedRemaining.toFixed(2)}, actual remaining: ${data.pool.length}, ${data.luck}`;
-    const remainingDiv = document.createElement("div");
-    remainingDiv.innerHTML = 'remaining: ' + data.pool.map((champ) => champ.championName).join(', ');
-    if (bestChamp) {
-        remainingDiv.innerHTML += '- best next guess:' + bestChamp.championName;
-    }
     div.appendChild(div1);
-    div.append(remainingDiv);
+
+    if (data.pool.length > 0) {
+        const remainingDiv = document.createElement("div");
+        remainingDiv.innerHTML = 'remaining: ' + data.pool.map((champ) => champ.championName).join(', ');
+        div.append(remainingDiv);
+    }
+
+    div.classList.add("border-list")
+    if (bestChamp) {
+        const guessDiv = document.createElement("div");
+        guessDiv.innerHTML += 'best next guess: ' + bestChamp.championName;
+        div.append(guessDiv);
+    }
     target.appendChild(div);
+
 }
 
 analyzeButton.addEventListener('click', () => {
@@ -160,7 +167,6 @@ analyzeButton.addEventListener('click', () => {
         }
 
         list = data.pool;
-        console.log(list);
     }
     const newData = giveAverageAndFilter(list, answerChampion, answerChampion);
     insertGuessQuality(answerChampion, data, botResultEl);
