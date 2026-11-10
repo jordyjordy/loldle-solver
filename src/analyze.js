@@ -114,11 +114,14 @@ const insertHistory = (guessedChampion, feedback, target) => {
     })
 }
 
-const insertGuessQuality = (guessChampion, data, target) => {
+const insertGuessQuality = (guessChampion, data, target, bestChamp) => {
     const div = document.createElement("div");
     div.innerHTML = `${guessChampion.championName} guess: average remaining: ${data.expectedRemaining.toFixed(2)}, actual remaining: ${data.pool.length}, ${data.luck}`;
     const remainingDiv = document.createElement("div");
     remainingDiv.innerHTML = 'remaining: ' + data.pool.map((champ) => champ.championName);
+    if (bestChamp) {
+        remainingDiv.innerHTML += '- best next guess:' + bestChamp.championName;
+    }
     target.appendChild(div);
     target.appendChild(remainingDiv);
 }
@@ -139,8 +142,8 @@ analyzeButton.addEventListener('click', () => {
         const data = giveAverageAndFilter(list, guessChampion, answerChampion);
         const feedback = getFeedbackArray(guessChampion, answerChampion);
         insertHistory(guessChampion, feedback, historyEl);
-        insertGuessQuality(guessChampion, data, resultEl);
-
+        const bg = bestGuess(data.pool);
+        insertGuessQuality(guessChampion, data, resultEl, bg);
         list = data.pool;
     });
     const finalFeedback = getFeedbackArray(answerChampion, answerChampion);
