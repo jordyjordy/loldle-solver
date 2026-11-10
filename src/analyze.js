@@ -21,17 +21,9 @@ championList.forEach((champion) => {
 let guesses = [];
 
 const analyzeList = document.getElementById("analyze-list-box");
-
+console.log(championList);
 const analyzeButton = document.getElementById("analyze-guess");
 const addButton = document.getElementById("add-button");
-
-championList.forEach((champion) => {
-    const option = document.createElement('option');
-    option.value = champion.championId;
-    option.id = `analyze-option-${champion.championId}`;
-    option.textContent = champion.championName;
-    championSelect.appendChild(option);
-});
 
 championSelect.addEventListener('change', (val) => {
     selectedChampion = val.target.value;
@@ -116,14 +108,16 @@ const insertHistory = (guessedChampion, feedback, target) => {
 
 const insertGuessQuality = (guessChampion, data, target, bestChamp) => {
     const div = document.createElement("div");
-    div.innerHTML = `${guessChampion.championName} guess: average remaining: ${data.expectedRemaining.toFixed(2)}, actual remaining: ${data.pool.length}, ${data.luck}`;
+    const div1 = document.createElement("div");
+    div1.innerHTML = `${guessChampion.championName} guess: average remaining: ${data.expectedRemaining.toFixed(2)}, actual remaining: ${data.pool.length}, ${data.luck}`;
     const remainingDiv = document.createElement("div");
-    remainingDiv.innerHTML = 'remaining: ' + data.pool.map((champ) => champ.championName);
+    remainingDiv.innerHTML = 'remaining: ' + data.pool.map((champ) => champ.championName).join(', ');
     if (bestChamp) {
         remainingDiv.innerHTML += '- best next guess:' + bestChamp.championName;
     }
+    div.appendChild(div1);
+    div.append(remainingDiv);
     target.appendChild(div);
-    target.appendChild(remainingDiv);
 }
 
 analyzeButton.addEventListener('click', () => {
